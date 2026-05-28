@@ -1,0 +1,17 @@
+{
+    "name": "zkteco/attendance-bridge",
+    "description": "ZKTeco MB10-VL attendance bridge to CodeIgniter 3 API",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "0mithun/php-zkteco": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZKTeco\\": "lib/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

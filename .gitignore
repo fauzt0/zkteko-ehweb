@@ -1,0 +1,22 @@
+# Composer dependencies
+vendor/
+composer.lock
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Sync tracking
+last_sync.txt
+
+# Environment overrides
+.env
+.env.local
