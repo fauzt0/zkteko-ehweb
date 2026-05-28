@@ -36,14 +36,32 @@ class ZKTecoCommunication
         $this->port    = $port;
         $this->timeout = $timeout;
         $this->logger  = $logger;
-        $this->device  = new ZKTeco(
-            $ip,
-            $port,
-            false,      // $shouldPing — disabled; ping check is done inside connect()
-            $timeout,
-            0,          // $password — no password by default
-            'tcp'       // $protocol — TCP is more reliable than UDP for MB10-VL
-        );
+        $this->device  = $this->createDevice();
+    }
+
+    /**
+     * Create the underlying ZKTeco library instance.
+     *
+     * ZKTeco devices use the ZK protocol over UDP on port 4370 by default.
+     * Using UDP means the constructor only creates a socket without attempting
+     * to connect — actual connection happens in connect() and returns false
+     * gracefully if the device is unreachable.
+     */
+    private function createDevice(): ZKTeco
+    {
+        try {
+            return new ZKTeco(
+                $this->ip,
+                $this->port,
+                false,      // $shouldPing — disabled; handled inside connect()
+                $this->timeout,
+                0,          // $password — no password by default
+                'udp'       // $protocol — ZKTeco uses UDP for the ZK protocol
+            );
+        } catch (Throwable $e) {
+            $this->logger->error("Failed to initialise ZKTeco library for {$this->ip}:{$this->port} — " . $e->getMessage());
+            throw $e;
+        }
     }
 
     /**
@@ -54,7 +72,7 @@ class ZKTecoCommunication
     public function connect(): bool
     {
         try {
-            $this->logger->info("Attempting TCP connection to {$this->ip}:{$this->port}");
+            $this->logger->info("Attempting UDP connection to {$this->ip}:{$this->port}");
 
             $result = $this->device->connect();
 

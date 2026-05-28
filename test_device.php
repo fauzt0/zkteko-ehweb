@@ -18,9 +18,9 @@ use ZKTeco\ZKTecoCommunication;
 
 // ── Parse CLI options ─────────────────────────────────────────────────────
 $options = getopt('', ['ip::', 'port::', 'timeout::', 'help']);
-$testIp      = $options['ip']      ?: ZKTECO_HOST;
-$testPort    = (int)($options['port']    ?: ZKTECO_PORT);
-$testTimeout = (int)($options['timeout'] ?: ZKTECO_TIMEOUT);
+$testIp      = $options['ip']      ?? ZKTECO_HOST;
+$testPort    = (int)($options['port']    ?? ZKTECO_PORT);
+$testTimeout = (int)($options['timeout'] ?? ZKTECO_TIMEOUT);
 
 if (isset($options['help'])) {
     echo "Usage: php test_device.php [options]\n";

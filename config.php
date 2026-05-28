@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // ZKTeco Device Settings
 // ---------------------------------------------------------------------------
-define('ZKTECO_HOST', '192.168.1.100');        // IP address of your ZKTeco MB10-VL device
+define('ZKTECO_HOST', '192.168.0.114');        // IP address of your ZKTeco MB10-VL device
 define('ZKTECO_PORT', 4370);                    // Default ZKTeco port (ZK protocol)
 define('ZKTECO_TIMEOUT', 5);                    // Connection timeout in seconds
 define('ZKTECO_DEVICE_MODEL', 'MB10-VL');       // Device model identifier
